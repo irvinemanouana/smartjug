@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SmartJug</string>
+    <string name="txt_mail">Email</string>
+    <string name="txt_pass">Mot de passe</string>
+    <string name="connexion">Connexion</string>
+    <string name="register">S enregister</string>
+</resources>

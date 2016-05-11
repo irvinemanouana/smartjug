@@ -15,6 +15,6 @@ public class RegisterActivity extends AppCompatActivity {
         transaction.add(fragment,null)
                 .addToBackStack(null)
                 .commit();*/
-        
+
     }
 }

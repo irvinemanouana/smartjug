@@ -24,7 +24,7 @@
             <EditText
                 android:id="@+id/ledmail"
                 android:hint="@string/txt_mail"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.design.widget.TextInputLayout>
@@ -42,7 +42,7 @@
 
 
         <Button
-            android:id="@+id/loginbut"
+            android:id="@+id/button_login"
             android:text="@string/connexion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

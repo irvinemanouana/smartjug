@@ -8,6 +8,8 @@
     <string name="string_men">Homme</string>
     <string name="string_name">Nom</string>
     <string name="string_lastname">Prémon</string>
+    <string name="err_message_invalid_mail">Veuillez saisir un mail valide</string>
+    <string name="err_message_empty_form">Veuillez remplire tous les champs</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

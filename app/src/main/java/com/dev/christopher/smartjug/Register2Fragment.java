@@ -8,19 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by Christopher on 11/05/2016.
+ * Created by Christopher on 12/05/2016.
  */
-public class Register1Fragment extends android.support.v4.app.Fragment {
-
+public class Register2Fragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_register,container,false);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
+        return inflater.inflate(R.layout.frag_register_part_2,container,false);
     }
 }

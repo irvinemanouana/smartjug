@@ -1,9 +1,12 @@
 package com.dev.christopher.smartjug.interfaceClient;
 
+import com.dev.christopher.smartjug.model.LoginModel;
 import com.dev.christopher.smartjug.model.User;
 
+import org.json.JSONObject;
+
 import retrofit.Callback;
-import retrofit.http.Field;
+import retrofit.http.Body;
 import retrofit.http.POST;
 
 /**
@@ -11,8 +14,9 @@ import retrofit.http.POST;
  */
 
 
-public interface userInterfaceClient {
-    @POST("/user/create")
-    void getUserInfo(@Field("email")String email, @Field("password")String password, Callback<User> userCallback);
+public interface UserInterfaceClient {
+
+    @POST("/user/login")
+    void getUserInfo(@Body LoginModel loginModel, Callback<User> userCallback);
 
 }

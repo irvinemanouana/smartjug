@@ -11,7 +11,7 @@ import retrofit.client.OkClient;
  */
 public class ServiceGenerator {
 
-    public static final String SMART_API_URL = "http://192.168.1.13:3000";
+    public static final String SMART_API_URL = "http://192.168.56.1:3000";
     private static RestAdapter.Builder builder = new RestAdapter.Builder()
             .setEndpoint(SMART_API_URL)
             .setClient(new OkClient(new OkHttpClient()));

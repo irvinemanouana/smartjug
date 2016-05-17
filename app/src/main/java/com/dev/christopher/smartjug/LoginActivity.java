@@ -4,18 +4,30 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+
+import com.dev.christopher.smartjug.generator.ServiceGenerator;
+import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
+import com.dev.christopher.smartjug.model.LoginModel;
+import com.dev.christopher.smartjug.model.User;
 import com.dev.christopher.smartjug.utility.Util;
+
+
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class LoginActivity extends AppCompatActivity {
     private Button loginButton,registerButton;
     private EditText emailEditText,passwEditText;
     private Util util;
     private String email,password;
+
 
     @Override
     protected void onStart() {
@@ -36,16 +48,30 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final View view = v;
                 email = emailEditText.getText().toString();
                 password = passwEditText.getText().toString();
 
                 if (util.checkloginForm(email,password)){
 
-                    if (util.checkMailAddress(email))
-                        /*
-                            call the web service here
-                         */
-                        Toast.makeText(getApplicationContext(),email,Toast.LENGTH_SHORT).show();
+                    if (util.checkMailAddress(email)){
+                        UserInterfaceClient client = ServiceGenerator.createService(UserInterfaceClient.class);
+                        LoginModel loginModel = new LoginModel(email,password);
+                        client.getUserInfo(loginModel, new Callback<User>() {
+                            @Override
+                            public void success(User user, Response response) {
+                                Log.d("user",user.toString());
+                                Log.d("Response",String.valueOf(response));
+                                if (user.get_id() ==null)
+                                    Snackbar.make(view,R.string.err_message_invalid_data,Snackbar.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                Log.d("error",String.valueOf(error));
+                            }
+                        });
+                    }
                     else
                         Snackbar.make(v,R.string.err_message_invalid_mail,Snackbar.LENGTH_SHORT).show();
                 }else {

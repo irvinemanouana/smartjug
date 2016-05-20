@@ -11,8 +11,12 @@
     <string name="err_message_invalid_mail">Veuillez saisir un mail valide</string>
     <string name="err_message_empty_form">Veuillez remplire tous les champs</string>
     <string name="err_message_invalid_data">Email ou mot de passe invalide</string>
-    <string name="height">Taille</string>
-    <string name="weight">Poids</string>
+    <string name="err_message_invalid_data_2">Une ou plusieurs valeurs incorrects</string>
+    <string name="height">Taille en cm</string>
+    <string name="weight">Poids en kilos</string>
+    <string name="ok_button">Ok</string>
+    <string name="_cancel_button">Annuler</string>
+    <string name="account_created">Vous pouvez desormais vous connecter</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

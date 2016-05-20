@@ -8,15 +8,24 @@ import android.util.Patterns;
 public class Util {
 
 
-    public boolean checkMailAddress(String email){
+    public static boolean checkMailAddress(String email){
         return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-    public boolean checkloginForm(String email,String password){
+    public static boolean checkloginForm(String email,String password){
         if (email.equals("") || password.equals(""))
             return false;
         else
             return true;
     }
+    public boolean CheckWeightAndHeight(String height,String weigh){
+        if ((height.length()>3) || (weigh.length() > 3)){
+            return false;
+        }
+        else
+            return true;
+
+    }
+
 
 
 }

@@ -18,18 +18,6 @@ public class User  {
     public User() {
     }
 
-    public User(String _id, String sex, String name, String lastname, String email, String created_at, String update_at, int height, int weight) {
-        this._id = _id;
-        this.sex = sex;
-        this.name = name;
-        this.lastname = lastname;
-        this.email = email;
-        this.created_at = created_at;
-        this.update_at = update_at;
-        this.height = height;
-        this.weight = weight;
-    }
-
     public User(String _id, String sex, String name, String lastname, String email, String created_at, String update_at, String password, int height, int weight) {
         this._id = _id;
         this.sex = sex;
@@ -40,6 +28,19 @@ public class User  {
         this.update_at = update_at;
         this.password = password;
         this.height = height;
+        this.weight = weight;
+    }
+
+    /*
+        constructor use to create user in register
+         */
+    public User(int height, String sex, String name, String lastname, String email, String password, int weight) {
+        this.height = height;
+        this.sex = sex;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
         this.weight = weight;
     }
 

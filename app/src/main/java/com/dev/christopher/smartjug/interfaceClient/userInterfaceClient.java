@@ -1,6 +1,7 @@
 package com.dev.christopher.smartjug.interfaceClient;
 
 import com.dev.christopher.smartjug.model.LoginModel;
+import com.dev.christopher.smartjug.model.RegisterModel;
 import com.dev.christopher.smartjug.model.User;
 
 import org.json.JSONObject;
@@ -18,5 +19,8 @@ public interface UserInterfaceClient {
 
     @POST("/user/login")
     void getUserInfo(@Body LoginModel loginModel, Callback<User> userCallback);
+
+    @POST("/user/create")
+    void createUser(@Body RegisterModel model, Callback<User> userCallback);
 
 }

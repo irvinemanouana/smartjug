@@ -25,13 +25,11 @@ import retrofit.client.Response;
 public class LoginActivity extends AppCompatActivity {
     private Button loginButton,registerButton;
     private EditText emailEditText,passwEditText;
-    private Util util;
     private String email,password;
 
 
     @Override
     protected void onStart() {
-        util = new Util();
         super.onStart();
     }
 
@@ -52,9 +50,9 @@ public class LoginActivity extends AppCompatActivity {
                 email = emailEditText.getText().toString();
                 password = passwEditText.getText().toString();
 
-                if (util.checkloginForm(email,password)){
+                if (Util.checkloginForm(email,password)){
 
-                    if (util.checkMailAddress(email)){
+                    if (Util.checkMailAddress(email)){
                         UserInterfaceClient client = ServiceGenerator.createService(UserInterfaceClient.class);
                         LoginModel loginModel = new LoginModel(email,password);
                         client.getUserInfo(loginModel, new Callback<User>() {

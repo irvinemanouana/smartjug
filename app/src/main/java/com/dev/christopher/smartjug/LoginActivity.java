@@ -14,6 +14,7 @@ import com.dev.christopher.smartjug.generator.ServiceGenerator;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
 import com.dev.christopher.smartjug.model.LoginModel;
 import com.dev.christopher.smartjug.model.User;
+import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
 import com.dev.christopher.smartjug.utility.Util;
 
 
@@ -30,7 +31,21 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        boolean userStatu = SavePreferences.newInstance(getApplicationContext()).checkLogin();
+        if (userStatu){
+            Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
         super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        emailEditText.setText("");
+        passwEditText.setText("");
+        super.onStop();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +77,15 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d("Response",String.valueOf(response));
                                 if (user.get_id() ==null)
                                     Snackbar.make(view,R.string.err_message_invalid_data,Snackbar.LENGTH_SHORT).show();
+                                else {
+                                    SavePreferences.newInstance(getApplicationContext()).createUserSession(user);
+                                    SavePreferences.newInstance(getApplicationContext()).checkLogin();
+                                }
                             }
 
                             @Override
                             public void failure(RetrofitError error) {
+                                //SavePreferences.newInstance(getApplicationContext()).checkLogin();
                                 Log.d("error",String.valueOf(error));
                             }
                         });

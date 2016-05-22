@@ -17,6 +17,8 @@ public class SavePreferences {
     private static SharedPreferences.Editor editor;
     private Context _context;
 
+    public   User userSave;
+
     private int PREF_MODE =0;
     private static final String PREF_NAME = "session";
     private static final String value_name="name";
@@ -52,8 +54,9 @@ public class SavePreferences {
     }
 
 
-    public  HashMap saveData(){
+   /* public  User saveData(){
         HashMap hashMap = new HashMap<>();
+        User user = new User(value_id,value_gender,value_name,value_lastname,value_email,va)
         hashMap.put(value_id,preferences.getString(value_id,null));
         hashMap.put(value_email,preferences.getString(value_email,null));
         hashMap.put(value_heigh,preferences.getInt(value_heigh,0));
@@ -62,6 +65,12 @@ public class SavePreferences {
         hashMap.put(value_name,preferences.getString(value_name,null));
         hashMap.put(value_lastname,preferences.getString(value_lastname,null));
         return hashMap;
+    }*/
+    public User getUserData(){
+       return  new User(preferences.getString(value_id,null),preferences.getString(value_gender,null),
+                preferences.getString(value_name,null),preferences.getString(value_lastname,null),
+                preferences.getString(value_email,null),
+                preferences.getInt(value_heigh,0),preferences.getInt(value_heigh,0));
     }
 
     public  void DestroyUserSession(){

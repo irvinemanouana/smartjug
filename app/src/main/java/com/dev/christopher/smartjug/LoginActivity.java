@@ -79,7 +79,9 @@ public class LoginActivity extends AppCompatActivity {
                                     Snackbar.make(view,R.string.err_message_invalid_data,Snackbar.LENGTH_SHORT).show();
                                 else {
                                     SavePreferences.newInstance(getApplicationContext()).createUserSession(user);
-                                    SavePreferences.newInstance(getApplicationContext()).checkLogin();
+                                    Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
                                 }
                             }
 

@@ -31,16 +31,13 @@ public class User  {
         this.weight = weight;
     }
 
-    /*
-        constructor use to create user in register
-         */
-    public User(int height, String sex, String name, String lastname, String email, String password, int weight) {
-        this.height = height;
+    public User(String _id, String sex, String name, String lastname, String email, int height, int weight) {
+        this._id = _id;
         this.sex = sex;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
-        this.password = password;
+        this.height = height;
         this.weight = weight;
     }
 

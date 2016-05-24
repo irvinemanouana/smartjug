@@ -51,7 +51,7 @@ public class Register1Fragment extends android.support.v4.app.Fragment implement
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
      View view =inflater.inflate(R.layout.frag_register,container,false);
-           genderRadioGroup = (RadioGroup) view.findViewById(R.id.gender);
+        genderRadioGroup = (RadioGroup) view.findViewById(R.id.gender);
         menRadioButton = (RadioButton) view.findViewById(R.id.men);
         womenRadioButton = (RadioButton) view.findViewById(R.id.women);
 

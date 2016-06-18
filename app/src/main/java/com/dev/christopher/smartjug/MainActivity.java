@@ -91,6 +91,25 @@ public class MainActivity extends AppCompatActivity implements
         lastname.setText(user.getLastname());
         email.setText(user.getEmail());
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.log_out:
+                        SavePreferences.newInstance(getApplicationContext()).DestroyUserSession();
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.my_account:
+                        Intent accountIntent = new Intent(getApplicationContext(), AccountActivity.class);
+                        startActivity(accountIntent);
+                        break;
+                }
+                return false;
+            }
+        });
+
        /* nameTextView = (TextView) findViewById(R.id.name_area);
         lastnameTextView = (TextView) findViewById(R.id.lastname_area);
         emailTextView = (TextView) findViewById(R.id.email_area);

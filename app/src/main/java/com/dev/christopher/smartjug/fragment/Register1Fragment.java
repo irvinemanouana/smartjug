@@ -1,4 +1,4 @@
-package com.dev.christopher.smartjug;
+package com.dev.christopher.smartjug.fragment;
 
 
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.dev.christopher.smartjug.R;
 import com.dev.christopher.smartjug.dialog.MessageAlertDialog;
 import com.dev.christopher.smartjug.generator.ServiceGenerator;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;

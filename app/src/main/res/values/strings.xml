@@ -26,6 +26,11 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
 
+   <!-- Account-->
+    <string name="profile">Profil</string>
+    <string name="activity">activité</string>
+    <string name="water_data">suivi conso</string>
+
     <string-array name="item_menu">
         <item>Mon compte</item>
         <item>Paramètre</item>

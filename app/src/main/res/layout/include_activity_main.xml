@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.dev.christopher.smartjug.MainActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
         android:theme="@style/AppTheme.AppBarOverlay"
@@ -18,5 +21,16 @@
             android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize"/>
     </android.support.design.widget.AppBarLayout>
+
+    <!--<az.plainpie.PieView
+        android:layout_gravity="center"
+        android:id="@+id/pieView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:inner_pie_padding="30"
+        app:percentage="50"
+        percentage_size="100"
+        app:inner_text_visibility="true" />-->
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

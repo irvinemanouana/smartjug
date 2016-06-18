@@ -7,13 +7,10 @@ import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.dev.christopher.smartjug.adapter.ViewPagerAdapter;
-import com.dev.christopher.smartjug.adapter.transformer.ZoomOutPageTransformer;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -37,15 +34,6 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initGoogleApi();
-
-       /* pager = (ViewPager) findViewById(R.id.pager);
-        pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new Register1Fragment());
-        pagerAdapter.addFragment(new Register2Fragment());
-        pager.setAdapter(pagerAdapter);
-        pager.setPageTransformer(true, new ZoomOutPageTransformer());*/
-
-
     }
 
     @Override

@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:drawableLeft="@drawable/ic_mail"
                 android:id="@+id/ledmail"
                 android:hint="@string/txt_mail"
                 android:inputType="textEmailAddress"
@@ -33,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:drawableLeft="@drawable/ic_password"
                 android:id="@+id/ledpass"
                 android:hint="@string/txt_pass"
                 android:inputType="textPassword"

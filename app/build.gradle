@@ -19,6 +19,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -30,5 +36,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.7.2'
     //GoogleClientApi
     compile 'com.google.android.gms:play-services:8.4.0'
+    /*plain-pie*/
+    compile 'com.github.zurche:plain-pie:v0.1.1'
 
 }

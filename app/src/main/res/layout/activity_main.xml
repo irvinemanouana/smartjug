@@ -17,26 +17,6 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:background="@color/colorPrimary">
-        <LinearLayout
-            android:background="@color/colorAccent"
-            android:padding="@dimen/activity_horizontal_margin"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.50">
-            <TextView
-                android:id="@+id/name_area"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/lastname_area"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/email_area"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
         <ListView
             android:id="@+id/drawer_list"
             android:layout_width="match_parent"

@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout_main"
     tools:context="com.dev.christopher.smartjug.MainActivity">
+
     <include
         layout="@layout/include_activity_main" />
     <LinearLayout
@@ -17,10 +19,11 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
         android:background="@color/colorPrimary">
-        <ListView
-            android:id="@+id/drawer_list"
+        <android.support.design.widget.NavigationView
+            android:id="@+id/menu_navigation"
             android:layout_width="match_parent"
             android:layout_weight="1"
+            app:menu="@menu/navigation_menu_drawer"
             android:layout_height="0dp"/>
     </LinearLayout>
 

@@ -8,6 +8,7 @@ import android.location.Location;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -33,12 +34,11 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     private User user;
-    private ListView drawerListView;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
-    private TextView nameTextView, lastnameTextView, emailTextView;
+    private NavigationView navigationView;
+    private TextView name, lastname, email;
     private Toolbar toolbar;
-    String userMail;
     private GoogleApiClient googleBuilder;
     private Location lastLocation;
 
@@ -81,8 +81,15 @@ public class MainActivity extends AppCompatActivity implements
         drawerToggle.syncState();
 
         user = SavePreferences.newInstance(getApplicationContext()).getUserData();
-        userMail = user.getName();
 
+        navigationView = (NavigationView) findViewById(R.id.menu_navigation);
+        View headerDrawer = navigationView.inflateHeaderView(R.layout.header_drawer);
+        name = (TextView) headerDrawer.findViewById(R.id.name);
+        lastname = (TextView) headerDrawer.findViewById(R.id.lastname);
+        email = (TextView) headerDrawer.findViewById(R.id.email);
+        name.setText(user.getName());
+        lastname.setText(user.getLastname());
+        email.setText(user.getEmail());
 
        /* nameTextView = (TextView) findViewById(R.id.name_area);
         lastnameTextView = (TextView) findViewById(R.id.lastname_area);
@@ -92,28 +99,7 @@ public class MainActivity extends AppCompatActivity implements
         lastnameTextView.setText(user.getLastname());
         emailTextView.setText(user.getEmail());
 */
-        drawerListView = (ListView) findViewById(R.id.drawer_list);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getResources().getTextArray(R.array.item_menu));
-        drawerListView.setAdapter(adapter);
-        drawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = (String) parent.getItemAtPosition(position);
-                if (item.equals("Mon compte")){
-                    Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
-                    startActivity(intent);
-                }
-                else if (item.equals("Paramètre"))
-                    Log.d("item", item);
-                else if (item.equals("Déconnexion")) {
-                    SavePreferences.newInstance(getApplicationContext()).DestroyUserSession();
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
 
-            }
-        });
     }
 
     @Override

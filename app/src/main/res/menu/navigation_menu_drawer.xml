@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:icon="@drawable/ic_action_account"
+            android:title="Mon compte"
+            android:id="@+id/my_account"/>
+        <item
+            android:icon="@drawable/ic_action_settings"
+            android:title="Paramètre"
+            android:id="@+id/settings"/>
 
+        <item
+            android:icon="@drawable/ic_action_logout"
+            android:title="Déconnexion"
+            android:id="@+id/log_out"/>
+
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:icon="@drawable/ic_action_about"
+            android:title="A propos"
+           android:id="@+id/about" />
+    </group>
 </menu>

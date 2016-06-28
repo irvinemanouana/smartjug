@@ -30,6 +30,8 @@
     <string name="profile">Profil</string>
     <string name="activity">activité</string>
     <string name="water_data">suivi conso</string>
+    <string name="logout">Déconnexion</string>
+    <string name="logout_message">Voulez-vous vraiment vous deconnecter?</string>
 
     <string-array name="item_menu">
         <item>Mon compte</item>

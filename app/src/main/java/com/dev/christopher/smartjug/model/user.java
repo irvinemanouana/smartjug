@@ -12,13 +12,14 @@ public class User  {
     private String created_at;
     private String update_at;
     private String password;
+    private String pathPicture;
     private int height;
     private int weight;
 
     public User() {
     }
 
-    public User(String _id, String sex, String name, String lastname, String email, String created_at, String update_at, String password, int height, int weight) {
+    public User(String _id, String sex, String name, String lastname, String email, String created_at, String update_at, String password, int height, int weight,String pathPicture) {
         this._id = _id;
         this.sex = sex;
         this.name = name;
@@ -29,14 +30,30 @@ public class User  {
         this.password = password;
         this.height = height;
         this.weight = weight;
+        this.pathPicture = pathPicture;
     }
 
-    public User(String _id, String sex, String name, String lastname, String email, int height, int weight) {
+    public User(String _id, String sex, String name, String lastname, String email, int height, int weight,String pathPicture) {
         this._id = _id;
         this.sex = sex;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
+        this.height = height;
+        this.weight = weight;
+        this.pathPicture = pathPicture;
+    }
+
+    public User(String _id, String sex, String name, String lastname, String email, String created_at, String update_at, String password, String pathPicture, int height, int weight) {
+        this._id = _id;
+        this.sex = sex;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.created_at = created_at;
+        this.update_at = update_at;
+        this.password = password;
+        this.pathPicture = pathPicture;
         this.height = height;
         this.weight = weight;
     }
@@ -51,6 +68,8 @@ public class User  {
                 ", email='" + email + '\'' +
                 ", created_at='" + created_at + '\'' +
                 ", update_at='" + update_at + '\'' +
+                ", password='" + password + '\'' +
+                ", pathPicture='" + pathPicture + '\'' +
                 ", height=" + height +
                 ", weight=" + weight +
                 '}';
@@ -90,5 +109,13 @@ public class User  {
 
     public int getWeight() {
         return weight;
+    }
+
+    public String getPathPicture() {
+        return pathPicture;
+    }
+
+    public void setPathPicture(String pathPicture) {
+        this.pathPicture = pathPicture;
     }
 }

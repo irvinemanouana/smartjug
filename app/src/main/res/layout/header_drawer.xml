@@ -6,6 +6,18 @@
     android:background="@drawable/header">
     <LinearLayout
         android:padding="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/profilicon"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/ic_action_account"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:padding="@dimen/activity_horizontal_margin"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

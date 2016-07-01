@@ -25,8 +25,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dev.christopher.smartjug.manager.DataManager;
 import com.dev.christopher.smartjug.model.User;
+import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -34,9 +37,11 @@ import com.google.android.gms.location.LocationServices;
 
 import java.util.HashMap;
 
+import az.plainpie.PieView;
+
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
-    private User user;
+    private UserResult user;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
@@ -82,16 +87,21 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        user = SavePreferences.newInstance(getApplicationContext()).getUserData();
+        user = DataManager.getInstance().getUserResult();
 
         navigationView = (NavigationView) findViewById(R.id.menu_navigation);
         View headerDrawer = navigationView.inflateHeaderView(R.layout.header_drawer);
         name = (TextView) headerDrawer.findViewById(R.id.name);
         lastname = (TextView) headerDrawer.findViewById(R.id.lastname);
         email = (TextView) headerDrawer.findViewById(R.id.email);
-        name.setText(user.getName());
-        lastname.setText(user.getLastname());
-        email.setText(user.getEmail());
+        if (user !=null) {
+            name.setText(user.getName());
+            lastname.setText(user.getLastname());
+            email.setText(user.getEmail());
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"aie",Toast.LENGTH_SHORT).show();
+        }
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -112,6 +122,14 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
+        PieView pieView = (PieView) findViewById(R.id.pieView);
+        pieView.setPercentageBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        pieView.setInnerTextVisibility(View.VISIBLE);
+        pieView.setInnerText("75 %");
+        pieView.setPercentageTextSize(75);
+
+
+
        /* nameTextView = (TextView) findViewById(R.id.name_area);
         lastnameTextView = (TextView) findViewById(R.id.lastname_area);
         emailTextView = (TextView) findViewById(R.id.email_area);
@@ -119,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements
         nameTextView.setText(userMail);
         lastnameTextView.setText(user.getLastname());
         emailTextView.setText(user.getEmail());
-*/
+        */
 
     }
 
@@ -160,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements
         if (lastLocation !=null){
             Log.d("longitude", String.valueOf(lastLocation.getLatitude()));
         }else {
-            Log.d("longitude", String.valueOf(lastLocation.getLatitude()));
+            Log.d("longitude", "null");
         }
 
     }

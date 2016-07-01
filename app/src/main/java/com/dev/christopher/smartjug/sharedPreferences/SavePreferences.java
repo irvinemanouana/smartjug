@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.dev.christopher.smartjug.model.User;
+import com.dev.christopher.smartjug.result.UserResult;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class SavePreferences {
     private static final String value_heigh="height";
     private static final String value_weight="weight";
     private static final String value_exist="exist";
+    private static final String value_pathPicture = "pathPicture";
 
     public SavePreferences(Context _context) {
         this._context = _context;
@@ -41,37 +43,11 @@ public class SavePreferences {
         return savePreferences;
     }
 
-    public  void createUserSession(User user){
+    public  void createUserSession(){
         editor.putBoolean(value_exist,true);
-        editor.putString(value_id,user.get_id());
-        editor.putString(value_email,user.getEmail());
-        editor.putString(value_gender,user.getSex());
-        editor.putString(value_lastname,user.getLastname());
-        editor.putString(value_name,user.getName());
-        editor.putInt(value_heigh,user.getHeight());
-        editor.putInt(value_weight,user.getWeight());
         editor.commit();
     }
 
-
-   /* public  User saveData(){
-        HashMap hashMap = new HashMap<>();
-        User user = new User(value_id,value_gender,value_name,value_lastname,value_email,va)
-        hashMap.put(value_id,preferences.getString(value_id,null));
-        hashMap.put(value_email,preferences.getString(value_email,null));
-        hashMap.put(value_heigh,preferences.getInt(value_heigh,0));
-        hashMap.put(value_weight,preferences.getInt(value_weight,0));
-        hashMap.put(value_gender,preferences.getString(value_gender,null));
-        hashMap.put(value_name,preferences.getString(value_name,null));
-        hashMap.put(value_lastname,preferences.getString(value_lastname,null));
-        return hashMap;
-    }*/
-    public User getUserData(){
-       return  new User(preferences.getString(value_id,null),preferences.getString(value_gender,null),
-                preferences.getString(value_name,null),preferences.getString(value_lastname,null),
-                preferences.getString(value_email,null),
-                preferences.getInt(value_heigh,0),preferences.getInt(value_heigh,0));
-    }
 
     public  void DestroyUserSession(){
         editor.clear();

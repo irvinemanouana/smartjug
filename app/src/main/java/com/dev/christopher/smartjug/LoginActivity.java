@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        EventBus.getDefault().register(this);
         boolean userStatu = SavePreferences.newInstance(getApplicationContext()).checkLogin();
         if (userStatu){
             Intent intent= new Intent(getApplicationContext(),MainActivity.class);
@@ -53,13 +54,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStop() {
         emailEditText.setText("");
         passwEditText.setText("");
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        EventBus.getDefault().register(this);
         dataManager = DataManager.getInstance();
         emailEditText = (EditText) findViewById(R.id.ledmail);
         passwEditText = (EditText) findViewById(R.id.ledpass);
@@ -103,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         SavePreferences.newInstance(getApplicationContext()).createUserSession();
         Log.d("onEventresult",result.toString());
         dataManager.setUserResult(result);
+        EventBus.getDefault().unregister(result);
         Intent intent= new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
         finish();

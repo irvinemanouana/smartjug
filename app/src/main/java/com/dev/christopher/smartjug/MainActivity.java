@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements
 
 
 
+
        /* nameTextView = (TextView) findViewById(R.id.name_area);
         lastnameTextView = (TextView) findViewById(R.id.lastname_area);
         emailTextView = (TextView) findViewById(R.id.email_area);

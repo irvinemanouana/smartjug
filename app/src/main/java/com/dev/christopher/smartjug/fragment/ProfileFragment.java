@@ -42,11 +42,23 @@ public class ProfileFragment extends Fragment {
     String imgDecodableString;
     private static int RESULT_LOAD_IMG = 1;
     private UserResult user;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(this);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
-        user = DataManager.getInstance().getUserResult();
+        user = SavePreferences.newInstance(getActivity()).getUserInfo();
         View view = inflater.inflate(R.layout.frag_my_account,container,false);
         profileImageView = (ImageView) view.findViewById(R.id.profilicon);
         profileImageView.setOnClickListener(new View.OnClickListener() {

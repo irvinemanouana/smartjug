@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        user = DataManager.getInstance().getUserResult();
+        user = SavePreferences.newInstance(this).getUserInfo();
 
         navigationView = (NavigationView) findViewById(R.id.menu_navigation);
         View headerDrawer = navigationView.inflateHeaderView(R.layout.header_drawer);

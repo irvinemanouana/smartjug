@@ -18,7 +18,6 @@ public class SavePreferences {
     private static SharedPreferences.Editor editor;
     private Context _context;
 
-    public   User userSave;
 
     private int PREF_MODE =0;
     private static final String PREF_NAME = "session";
@@ -29,6 +28,7 @@ public class SavePreferences {
     private static final String value_email="email";
     private static final String value_heigh="height";
     private static final String value_weight="weight";
+    private static final String value_date_created ="date";
     private static final String value_exist="exist";
     private static final String value_pathPicture = "pathPicture";
 
@@ -43,9 +43,31 @@ public class SavePreferences {
         return savePreferences;
     }
 
-    public  void createUserSession(){
+    public  void createUserSession(UserResult result){
         editor.putBoolean(value_exist,true);
+        editor.putString(value_id,result.get_id());
+        editor.putString(value_gender,result.getSex());
+        editor.putString(value_name,result.getName());
+        editor.putString(value_lastname,result.getLastname());
+        editor.putString(value_pathPicture,result.getPathPicture());
+        editor.putString(value_date_created,result.getCreated_at());
+        editor.putInt(value_heigh,result.getHeight());
+        editor.putInt(value_weight,result.getWeight());
+        editor.putString(value_email,result.getEmail());
         editor.commit();
+    }
+
+    public UserResult getUserInfo(){
+        return  new UserResult(preferences.getInt(value_weight,0),
+                preferences.getString(value_id,null),
+                preferences.getString(value_gender,null),
+                preferences.getString(value_name,null),
+                preferences.getString(value_lastname,null),
+                preferences.getString(value_email,null),
+                preferences.getString(value_date_created,null),
+                null,
+                preferences.getString(value_pathPicture,null),
+                preferences.getInt(value_heigh,0));
     }
 
 

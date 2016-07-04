@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UserResult result){
-        SavePreferences.newInstance(getApplicationContext()).createUserSession();
+        SavePreferences.newInstance(getApplicationContext()).createUserSession(result);
         Log.d("onEventresult",result.toString());
         dataManager.setUserResult(result);
         EventBus.getDefault().unregister(result);

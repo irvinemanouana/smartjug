@@ -29,11 +29,17 @@ import android.widget.Toast;
 
 import com.dev.christopher.smartjug.manager.DataManager;
 import com.dev.christopher.smartjug.model.User;
+import com.dev.christopher.smartjug.result.ErrorResult;
+import com.dev.christopher.smartjug.result.NetworkResult;
 import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 
@@ -53,12 +59,14 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
         googleBuilder.connect();
+        EventBus.getDefault().register(this);
         super.onStart();
     }
 
     @Override
     protected void onStop() {
         googleBuilder.disconnect();
+        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 
@@ -192,5 +200,10 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(NetworkResult result){
+        Log.d("onEvent",result.getContent());
+        Toast.makeText(getApplicationContext(),result.getContent(),Toast.LENGTH_SHORT).show();
     }
 }

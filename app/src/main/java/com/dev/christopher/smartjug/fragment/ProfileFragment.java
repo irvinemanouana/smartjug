@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dev.christopher.smartjug.R;
@@ -29,6 +30,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONObject;
 
+import az.plainpie.PieView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -42,7 +44,8 @@ public class ProfileFragment extends Fragment {
     String imgDecodableString;
     private static int RESULT_LOAD_IMG = 1;
     private UserResult user;
-
+    TextView size,weight,gender,name,lastname,email,date;
+    PieView pieView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -55,11 +58,38 @@ public class ProfileFragment extends Fragment {
         super.onStop();
     }
 
+    public float imc(int height,int weight){
+        float result = (float) ((int)weight/(int) height*2);
+        return result;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         user = SavePreferences.newInstance(getActivity()).getUserInfo();
         View view = inflater.inflate(R.layout.frag_my_account,container,false);
+        size = (TextView) view.findViewById(R.id.size_);
+        gender = (TextView) view.findViewById(R.id.gender_);
+        weight = (TextView) view.findViewById(R.id.weight_);
+        name = (TextView) view.findViewById(R.id.name_);
+        lastname = (TextView) view.findViewById(R.id.lastname_);
+        email =(TextView) view.findViewById(R.id.email_);
+        date = (TextView) view.findViewById(R.id.date_);
+
+        name.setText(user.getName().toUpperCase());
+        lastname.setText(user.getLastname().toUpperCase());
+        email.setText(user.getEmail());
+        date.setText(user.getCreated_at());
+
+
+        size.setText("Taille "+String.valueOf(user.getHeight())+" CM");
+        weight.setText("Poids "+String.valueOf(user.getWeight())+" Kilos");
+        gender.setText(user.getSex());
+
+        pieView =(PieView) view.findViewById(R.id.pieView);
+        Log.d("IMC",String.valueOf(imc(180,80)));
+        pieView.setmPercentage(2);
+
         profileImageView = (ImageView) view.findViewById(R.id.profilicon);
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override

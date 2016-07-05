@@ -18,6 +18,8 @@
     <string name="_cancel_button">Annuler</string>
     <string name="account_created">Vous pouvez desormais vous connecter</string>
     <string name="wrong">Un problème est survenu</string>
+    <string name="measurement">Mensurations</string>
+    <string name="info">Infos</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

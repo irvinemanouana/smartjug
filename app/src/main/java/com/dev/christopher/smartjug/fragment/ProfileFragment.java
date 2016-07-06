@@ -84,7 +84,10 @@ public class ProfileFragment extends Fragment {
 
         size.setText("Taille "+String.valueOf(user.getHeight())+" CM");
         weight.setText("Poids "+String.valueOf(user.getWeight())+" Kilos");
-        gender.setText(user.getSex());
+        if (user.getSex().equals("men")){
+            gender.setText(getString(R.string.string_men));
+        }
+
 
         pieView =(PieView) view.findViewById(R.id.pieView);
         Log.d("IMC",String.valueOf(imc(180,80)));

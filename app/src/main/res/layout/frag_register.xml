@@ -13,13 +13,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <RadioButton
+                android:drawableLeft="@drawable/ic_action_men"
                 android:id="@+id/men"
-                android:text="@string/string_women"
+                android:text="@string/string_men"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <RadioButton
+                android:drawableLeft="@drawable/ic_action_woman"
                 android:id="@+id/women"
-                android:text="@string/string_men"
+                android:text="@string/string_woman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RadioGroup>

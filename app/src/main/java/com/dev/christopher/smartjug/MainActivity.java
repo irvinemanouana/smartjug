@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -102,10 +104,16 @@ public class MainActivity extends AppCompatActivity implements
         name = (TextView) headerDrawer.findViewById(R.id.name);
         lastname = (TextView) headerDrawer.findViewById(R.id.lastname);
         email = (TextView) headerDrawer.findViewById(R.id.email);
+        ImageView profilicon= (ImageView) headerDrawer.findViewById(R.id.profilicon);
+
         if (user !=null) {
+            Log.d("testUser",user.toString());
             name.setText(user.getName());
             lastname.setText(user.getLastname());
             email.setText(user.getEmail());
+            if (user.getPathPicture()!=null)
+                profilicon.setImageBitmap(BitmapFactory
+                        .decodeFile(user.getPathPicture()));
         }
         else {
             Toast.makeText(getApplicationContext(),"aie",Toast.LENGTH_SHORT).show();

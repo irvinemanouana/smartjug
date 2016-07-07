@@ -5,12 +5,34 @@ package com.dev.christopher.smartjug.model;
  */
 public class UpdateProfileIconModel {
     private String email;
-    private String path;
+    private String pathPicture;
 
     public UpdateProfileIconModel(String email, String path) {
         this.email = email;
-        this.path = path;
+        this.pathPicture = path;
     }
 
+    @Override
+    public String toString() {
+        return "UpdateProfileIconModel{" +
+                "email='" + email + '\'' +
+                ", pathPicture='" + pathPicture + '\'' +
+                '}';
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPathPicture() {
+        return pathPicture;
+    }
+
+    public void setPathPicture(String pathPicture) {
+        this.pathPicture = pathPicture;
+    }
 }

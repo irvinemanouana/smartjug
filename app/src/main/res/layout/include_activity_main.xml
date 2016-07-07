@@ -32,13 +32,15 @@
             android:id="@+id/pieView"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            app:inner_pie_padding="70"
+            app:inner_pie_padding="50"
             app:percentage="65"
             percentage_size="0"
             app:inner_text="@string/accept"
             app:inner_text_visibility="true" />
     </RelativeLayout>
     <ListView
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:id="@+id/list_water_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

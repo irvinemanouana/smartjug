@@ -28,6 +28,7 @@ import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import az.plainpie.PieView;
@@ -46,6 +47,7 @@ public class ProfileFragment extends Fragment {
     private UserResult user;
     TextView size,weight,gender,name,lastname,email,date;
     PieView pieView;
+    ImageView profilicon;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         EventBus.getDefault().register(this);
@@ -54,7 +56,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onStop() {
-        EventBus.getDefault().unregister(this);
+        //EventBus.getDefault().unregister(this);
         super.onStop();
     }
 
@@ -75,17 +77,22 @@ public class ProfileFragment extends Fragment {
         lastname = (TextView) view.findViewById(R.id.lastname_);
         email =(TextView) view.findViewById(R.id.email_);
         date = (TextView) view.findViewById(R.id.date_);
+        profilicon= (ImageView) view.findViewById(R.id.profilicon);
 
         name.setText(user.getName().toUpperCase());
         lastname.setText(user.getLastname().toUpperCase());
         email.setText(user.getEmail());
         date.setText(user.getCreated_at());
-
+        if (user.getPathPicture()!=null)
+            profilicon.setImageBitmap(BitmapFactory
+                    .decodeFile(user.getPathPicture()));
 
         size.setText("Taille "+String.valueOf(user.getHeight())+" CM");
         weight.setText("Poids "+String.valueOf(user.getWeight())+" Kilos");
         if (user.getSex().equals("men")){
             gender.setText(getString(R.string.string_men));
+        }else {
+            gender.setText(getString(R.string.string_woman));
         }
 
 
@@ -141,13 +148,16 @@ public class ProfileFragment extends Fragment {
                     .show();
         }
     }
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UserResult result){
         DataManager.getInstance().setUserResult(result);
+        SavePreferences.newInstance(getActivity()).DestroyUserSession();
+        SavePreferences.newInstance(getActivity()).createUserSession(result);
         Log.d("onEventProfil",result.toString());
+        EventBus.getDefault().unregister(this);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ErrorResult result){
         Log.d("onEventProfil",result.toString());
     }

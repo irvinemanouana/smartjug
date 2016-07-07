@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "639586455430",
+    "project_id": "firebase-smartjug"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639586455430:android:e5a37ce7c3925886",
+        "android_client_info": {
+          "package_name": "com.dev.christopher.smartjug"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYnWphJQwBeUyrCX_Vawznt6Y7LMSnNuU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -42,6 +42,7 @@ public class DataManager {
         client.updateProfil(iconModel, new Callback<UserResult>() {
             @Override
             public void success(UserResult userResult, Response response) {
+                Log.d("user",userResult.toString());
                 EventBus.getDefault().post(userResult);
             }
 

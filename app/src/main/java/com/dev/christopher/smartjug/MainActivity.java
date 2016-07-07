@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dev.christopher.smartjug.dialog.LoaderDialog;
 import com.dev.christopher.smartjug.manager.DataManager;
 import com.dev.christopher.smartjug.model.User;
 import com.dev.christopher.smartjug.result.ErrorResult;

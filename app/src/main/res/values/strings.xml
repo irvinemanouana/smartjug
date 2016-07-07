@@ -35,6 +35,7 @@
     <string name="water_data">suivi conso</string>
     <string name="logout">Déconnexion</string>
     <string name="logout_message">Voulez-vous vraiment vous deconnecter?</string>
+    <string name="loader_string">chargement...</string>
 
     <string-array name="item_menu">
         <item>Mon compte</item>

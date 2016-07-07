@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.dev.christopher.smartjug.dialog.LoaderDialog;
 import com.dev.christopher.smartjug.generator.ServiceGenerator;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
 import com.dev.christopher.smartjug.manager.DataManager;
@@ -36,10 +37,12 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailEditText,passwEditText;
     private String email,password;
     private DataManager dataManager;
+    private LoaderDialog loaderDialog;
 
     @Override
     protected void onStart() {
         EventBus.getDefault().register(this);
+        loaderDialog = LoaderDialog.newInstance();
         boolean userStatu = SavePreferences.newInstance(getApplicationContext()).checkLogin();
         if (userStatu){
             Intent intent= new Intent(getApplicationContext(),MainActivity.class);
@@ -78,12 +81,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (Util.checkloginForm(email,password)){
 
                     if (Util.checkMailAddress(email)){
+                        loaderDialog.show(getFragmentManager(),null);
                         LoginModel loginModel = new LoginModel(email,password);
                         dataManager.Login(loginModel);
 
                     }
-                    else
-                        Snackbar.make(v,R.string.err_message_invalid_mail,Snackbar.LENGTH_SHORT).show();
+                    else {
+                        Snackbar.make(v, R.string.err_message_invalid_mail, Snackbar.LENGTH_SHORT).show();
+                    }
                 }else {
                     Snackbar.make(v,R.string.err_message_empty_form,Snackbar.LENGTH_SHORT).show();
                 }
@@ -105,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("onEventresult",result.toString());
         dataManager.setUserResult(result);
         EventBus.getDefault().unregister(result);
+        loaderDialog.dismiss();
         Intent intent= new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
         finish();
@@ -113,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Subscribe
     public void onEvent(ErrorResult result){
+        loaderDialog.dismiss();
         Toast.makeText(getApplicationContext(),R.string.wrong,Toast.LENGTH_SHORT).show();
     }
 }

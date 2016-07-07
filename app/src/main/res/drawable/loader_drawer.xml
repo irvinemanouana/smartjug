@@ -1,0 +1,8 @@
+<animation-list android:id="@+id/smart_anim" android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/center" android:duration="200"/>
+    <item android:drawable="@drawable/left" android:duration="200"/>
+    <item android:drawable="@drawable/top" android:duration="200"/>
+    <item android:drawable="@drawable/right" android:duration="200"/>
+
+</animation-list>

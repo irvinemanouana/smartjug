@@ -1,12 +1,12 @@
 {
   "project_info": {
-    "project_number": "639586455430",
-    "project_id": "firebase-smartjug"
+    "project_number": "866408839187",
+    "project_id": "smartjug-ea328"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:639586455430:android:e5a37ce7c3925886",
+        "mobilesdk_app_id": "1:866408839187:android:c4fcd7b5546eb413",
         "android_client_info": {
           "package_name": "com.dev.christopher.smartjug"
         }
@@ -14,7 +14,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDYnWphJQwBeUyrCX_Vawznt6Y7LMSnNuU"
+          "current_key": "AIzaSyB85sUSzPk1VBAwoOuGZy-ETTZKXSp46uM"
         }
       ],
       "services": {

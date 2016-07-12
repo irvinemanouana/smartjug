@@ -1,8 +1,6 @@
 package com.dev.christopher.smartjug;
 
 import android.Manifest;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -15,36 +13,33 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dev.christopher.smartjug.dialog.LoaderDialog;
-import com.dev.christopher.smartjug.manager.DataManager;
-import com.dev.christopher.smartjug.model.User;
-import com.dev.christopher.smartjug.result.ErrorResult;
 import com.dev.christopher.smartjug.result.NetworkResult;
 import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
+import com.dev.christopher.smartjug.utility.Tag;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.HashMap;
+
+import java.net.URISyntaxException;
 
 import az.plainpie.PieView;
 
@@ -58,6 +53,14 @@ public class MainActivity extends AppCompatActivity implements
     private Toolbar toolbar;
     private GoogleApiClient googleBuilder;
     private Location lastLocation;
+/*    private Socket socket;
+    {
+        try {
+            socket = IO.socket(Tag.SMART_API_URL);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }*/
 
     @Override
     protected void onStart() {
@@ -74,6 +77,12 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        /*socket.disconnect();*/
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -84,14 +93,13 @@ public class MainActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
-
+     /*   if (socket!=null)
+            socket.connect();*/
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_main);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, 0, 0);
@@ -145,17 +153,6 @@ public class MainActivity extends AppCompatActivity implements
         pieView.setInnerText("75 %");
         pieView.setPercentageTextSize(75);
 
-
-
-
-       /* nameTextView = (TextView) findViewById(R.id.name_area);
-        lastnameTextView = (TextView) findViewById(R.id.lastname_area);
-        emailTextView = (TextView) findViewById(R.id.email_area);
-
-        nameTextView.setText(userMail);
-        lastnameTextView.setText(user.getLastname());
-        emailTextView.setText(user.getEmail());
-        */
 
     }
 

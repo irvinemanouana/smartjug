@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#CFD8DC"
+    android:background="@drawable/splashscreen"
     tools:context="com.dev.christopher.smartjug.LoginActivity">
 
     <LinearLayout
@@ -23,6 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:drawableLeft="@drawable/ic_mail"
                 android:id="@+id/ledmail"
                 android:hint="@string/txt_mail"
@@ -33,9 +35,12 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
+            android:textColor="@color/white"
             android:layout_height="wrap_content">
             <EditText
                 android:drawableLeft="@drawable/ic_password"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:id="@+id/ledpass"
                 android:hint="@string/txt_pass"
                 android:inputType="textPassword"

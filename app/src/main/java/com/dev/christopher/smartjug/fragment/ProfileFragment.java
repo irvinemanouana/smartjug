@@ -60,9 +60,10 @@ public class ProfileFragment extends Fragment {
         super.onStop();
     }
 
-    public float imc(int height,int weight){
-        float result = (float) ((int)weight/(int) height*2);
-        return result;
+    public float imc(int weight,int height){
+        double size =Math.pow((double)height,2);
+        float result = (float) ((double)weight/size);
+        return result*100;
     }
 
     @Nullable
@@ -97,8 +98,11 @@ public class ProfileFragment extends Fragment {
 
 
         pieView =(PieView) view.findViewById(R.id.pieView);
-        Log.d("IMC",String.valueOf(imc(180,80)));
-        pieView.setmPercentage(2);
+        Log.d("IMC",String.valueOf(imc(70,160)*100));
+        float imcIndice = (float)imc(70,160)*100;
+        pieView.setInnerTextVisibility(View.VISIBLE);
+        pieView.setInnerText("IMC");
+        pieView.setmPercentage((float)imc(70,160)*100);
 
         profileImageView = (ImageView) view.findViewById(R.id.profilicon);
         profileImageView.setOnClickListener(new View.OnClickListener() {

@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -26,20 +27,17 @@ import android.widget.Toast;
 import com.dev.christopher.smartjug.result.NetworkResult;
 import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
-import com.dev.christopher.smartjug.utility.Tag;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
-import java.net.URISyntaxException;
 
 import az.plainpie.PieView;
 
@@ -53,14 +51,7 @@ public class MainActivity extends AppCompatActivity implements
     private Toolbar toolbar;
     private GoogleApiClient googleBuilder;
     private Location lastLocation;
-/*    private Socket socket;
-    {
-        try {
-            socket = IO.socket(Tag.SMART_API_URL);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-    }*/
+    private CardView cardViewBottle;
 
     @Override
     protected void onStart() {
@@ -93,8 +84,15 @@ public class MainActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
-     /*   if (socket!=null)
-            socket.connect();*/
+
+        cardViewBottle = (CardView)  findViewById(R.id.bottle_card);
+        cardViewBottle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ScannerActivity.class);
+                startActivity(intent);
+            }
+        });
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

@@ -3,9 +3,11 @@ package com.dev.christopher.smartjug.manager;
 import android.util.Log;
 
 import com.dev.christopher.smartjug.generator.ServiceGenerator;
+import com.dev.christopher.smartjug.interfaceClient.BottleInterfaceClient;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
 import com.dev.christopher.smartjug.model.LoginModel;
 import com.dev.christopher.smartjug.model.UpdateProfileIconModel;
+import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.ErrorResult;
 import com.dev.christopher.smartjug.result.UserResult;
 
@@ -22,21 +24,18 @@ public class DataManager {
 
     private static UserResult userResult;
     private static UserInterfaceClient client;
+    private static BottleInterfaceClient bottle;
 
     public DataManager() {
         this.client = ServiceGenerator.createService(UserInterfaceClient.class);
+        this.bottle= ServiceGenerator.createService(BottleInterfaceClient.class);
     }
 
-    public DataManager(UserResult userResult) {
-        this.userResult = userResult;
-    }
 
     public static  DataManager getInstance(){
         return new DataManager();
     }
-    public static  DataManager getInstanceInit(UserResult result){
-        return new DataManager(result);
-    }
+
 
     public void changeProfilIcon(UpdateProfileIconModel iconModel){
         client.updateProfil(iconModel, new Callback<UserResult>() {
@@ -77,5 +76,20 @@ public class DataManager {
 
     public UserResult getUserResult() {
         return userResult;
+    }
+
+    public void addBottle(String idUser){
+        bottle.linkBottle(idUser, new Callback<BottleResult>() {
+            @Override
+            public void success(BottleResult bottleResult, Response response) {
+                EventBus.getDefault().post(bottleResult);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                String message = "Un problème est survenu";
+                EventBus.getDefault().post(new ErrorResult(message));
+            }
+        });
     }
 }

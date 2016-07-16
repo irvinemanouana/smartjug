@@ -5,13 +5,17 @@ import android.util.Log;
 import com.dev.christopher.smartjug.generator.ServiceGenerator;
 import com.dev.christopher.smartjug.interfaceClient.BottleInterfaceClient;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
+import com.dev.christopher.smartjug.model.BottleToUserModel;
 import com.dev.christopher.smartjug.model.LoginModel;
+import com.dev.christopher.smartjug.model.RegisterModel;
 import com.dev.christopher.smartjug.model.UpdateProfileIconModel;
+import com.dev.christopher.smartjug.model.User;
 import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.ErrorResult;
 import com.dev.christopher.smartjug.result.UserResult;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -66,7 +70,19 @@ public class DataManager {
             }
         });
     }
+    public void register(RegisterModel model){
+        client.createUser(model, new Callback<UserResult>() {
+            @Override
+            public void success(UserResult userResult, Response response) {
+                EventBus.getDefault().post(userResult);
+            }
 
+            @Override
+            public void failure(RetrofitError error) {
+                EventBus.getDefault().post(error);
+            }
+        });
+    }
 
 
     public void setUserResult(UserResult result){
@@ -78,8 +94,8 @@ public class DataManager {
         return userResult;
     }
 
-    public void addBottle(String idUser){
-        bottle.linkBottle(idUser, new Callback<BottleResult>() {
+    public void addBottle(BottleToUserModel model){
+        bottle.linkBottle(model, new Callback<BottleResult>() {
             @Override
             public void success(BottleResult bottleResult, Response response) {
                 EventBus.getDefault().post(bottleResult);
@@ -87,9 +103,11 @@ public class DataManager {
 
             @Override
             public void failure(RetrofitError error) {
-                String message = "Un problème est survenu";
-                EventBus.getDefault().post(new ErrorResult(message));
+                EventBus.getDefault().post(error);
             }
         });
     }
+
+
+
 }

@@ -15,6 +15,8 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import org.greenrobot.eventbus.EventBus;
+
 
 public class RegisterActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     /*private ViewPager pager;
@@ -25,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
 
     @Override
     protected void onStart() {
+        //EventBus.getDefault().register(this);
         googleBuilder.connect();
         super.onStart();
     }
@@ -38,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity implements GoogleApiClie
 
     @Override
     protected void onStop() {
+        //EventBus.getDefault().unregister(this);
         googleBuilder.disconnect();
         super.onStop();
     }

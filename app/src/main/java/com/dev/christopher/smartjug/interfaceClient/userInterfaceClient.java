@@ -19,14 +19,13 @@ import retrofit.http.POST;
 
 public interface UserInterfaceClient {
 
-    @POST("/user/login")
-    void getUserInfo(@Body LoginModel loginModel, Callback<User> userCallback);
+
 
     @POST("/user/login")
     void getUser(@Body LoginModel loginModel, Callback<UserResult> userCallback);
 
     @POST("/user/create")
-    void createUser(@Body RegisterModel model, Callback<User> userCallback);
+    void createUser(@Body RegisterModel model, Callback<UserResult> userCallback);
 
     @POST("/user/update/image")
     void updateProfil(@Body UpdateProfileIconModel iconModel, Callback<UserResult> userCallback);

@@ -22,6 +22,7 @@ import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
 import com.dev.christopher.smartjug.manager.DataManager;
 import com.dev.christopher.smartjug.model.UpdateProfileIconModel;
 import com.dev.christopher.smartjug.model.User;
+import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.ErrorResult;
 import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
@@ -154,9 +155,11 @@ public class ProfileFragment extends Fragment {
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(UserResult result){
+        BottleResult  bottleResult = SavePreferences.newInstance(getActivity()).getBottle();
         DataManager.getInstance().setUserResult(result);
         SavePreferences.newInstance(getActivity()).DestroyUserSession();
-        SavePreferences.newInstance(getActivity()).createUserSession(result);
+        SavePreferences.newInstance(getActivity()).createUserSession(result,bottleResult);
+        Log.d(bottleResult.toString()," :BottleResult");
         Log.d("onEventProfil",result.toString());
         EventBus.getDefault().unregister(this);
     }

@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.NetworkResult;
 import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient googleBuilder;
     private Location lastLocation;
     private CardView cardViewBottle;
+    private BottleResult bottleResult;
 
     @Override
     protected void onStart() {
@@ -105,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements
         drawerToggle.syncState();
 
         user = SavePreferences.newInstance(this).getUserInfo();
+        bottleResult = SavePreferences.newInstance(this).getBottle();
+
+        Log.d(bottleResult.toString(), " :MAIN_BOTTLE");
 
         navigationView = (NavigationView) findViewById(R.id.menu_navigation);
         View headerDrawer = navigationView.inflateHeaderView(R.layout.header_drawer);

@@ -17,7 +17,9 @@ import com.dev.christopher.smartjug.generator.ServiceGenerator;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
 import com.dev.christopher.smartjug.manager.DataManager;
 import com.dev.christopher.smartjug.model.LoginModel;
+import com.dev.christopher.smartjug.model.OwnerModel;
 import com.dev.christopher.smartjug.model.User;
+import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.ErrorResult;
 import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
@@ -38,9 +40,12 @@ public class LoginActivity extends AppCompatActivity {
     private String email,password;
     private DataManager dataManager;
     private LoaderDialog loaderDialog;
+    private static final String FROM_ACCOUNT = "ACCOUNT";
+    private UserResult userResult;
 
     @Override
     protected void onStart() {
+        EventBus.clearCaches();
         EventBus.getDefault().register(this);
         loaderDialog = LoaderDialog.newInstance();
         boolean userStatu = SavePreferences.newInstance(getApplicationContext()).checkLogin();
@@ -69,7 +74,18 @@ public class LoginActivity extends AppCompatActivity {
         passwEditText = (EditText) findViewById(R.id.ledpass);
         loginButton = (Button) findViewById(R.id.button_login);
         registerButton = (Button) findViewById(R.id.button_register);
+        Intent intent = getIntent();
 
+        if (intent.hasExtra(FROM_ACCOUNT)){
+            Boolean link_success= intent.getBooleanExtra(FROM_ACCOUNT,true);
+            if (link_success){
+
+            }
+            else{
+
+            }
+
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,16 +120,36 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEvent(UserResult result){
-        SavePreferences.newInstance(getApplicationContext()).createUserSession(result);
+    @Subscribe
+    public void onEventMainThread(UserResult result){
+        /*SavePreferences.newInstance(getApplicationContext()).createUserSession(result);
         Log.d("onEventresult",result.toString());
         dataManager.setUserResult(result);
         EventBus.getDefault().unregister(result);
         loaderDialog.dismiss();
         Intent intent= new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
+        finish();*/
+        this.userResult = result;
+        Log.d(result.toString(), ":UserMain");
+        DataManager.getInstance().foudBottle(new OwnerModel(result.get_id()));
+    }
+    @Subscribe
+    public void onEvent(BottleResult bottleResult){
+        Log.d(bottleResult.toString()," bottleMain");
+        loaderDialog.dismiss();
+        SavePreferences.newInstance(getApplicationContext()).createUserSession(userResult,bottleResult);
+        dataManager.setUserResult(userResult);
+        EventBus.getDefault().unregister(this);
+        loaderDialog.dismiss();
+        Intent intent= new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(intent);
         finish();
+    }
+    @Subscribe
+    public void onEventMainThread(RetrofitError error){
+        Log.d(error.getMessage()," :Retrofit");
+        loaderDialog.dismiss();
     }
 
 

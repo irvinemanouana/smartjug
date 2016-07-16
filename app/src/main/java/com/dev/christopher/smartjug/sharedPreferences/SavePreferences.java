@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.dev.christopher.smartjug.model.User;
+import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.UserResult;
 
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class SavePreferences {
     private static final String value_date_created ="date";
     private static final String value_exist="exist";
     private static final String value_pathPicture = "pathPicture";
+    private static final String value_bottle = "bottle";
 
     public SavePreferences(Context _context) {
         this._context = _context;
@@ -43,7 +45,7 @@ public class SavePreferences {
         return savePreferences;
     }
 
-    public  void createUserSession(UserResult result){
+    public  void createUserSession(UserResult result,BottleResult bottleResult){
         editor.putBoolean(value_exist,true);
         editor.putString(value_id,result.get_id());
         editor.putString(value_gender,result.getSex());
@@ -54,6 +56,7 @@ public class SavePreferences {
         editor.putInt(value_heigh,result.getHeight());
         editor.putInt(value_weight,result.getWeight());
         editor.putString(value_email,result.getEmail());
+        editor.putString(value_bottle,bottleResult.get_id());
         editor.commit();
     }
 
@@ -68,6 +71,10 @@ public class SavePreferences {
                 null,
                 preferences.getString(value_pathPicture,null),
                 preferences.getInt(value_heigh,0));
+    }
+
+    public BottleResult getBottle(){
+        return  new BottleResult(preferences.getString(value_id,null),preferences.getString(value_bottle,null));
     }
 
 

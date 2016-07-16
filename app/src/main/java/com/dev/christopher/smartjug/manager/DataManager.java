@@ -7,6 +7,7 @@ import com.dev.christopher.smartjug.interfaceClient.BottleInterfaceClient;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
 import com.dev.christopher.smartjug.model.BottleToUserModel;
 import com.dev.christopher.smartjug.model.LoginModel;
+import com.dev.christopher.smartjug.model.OwnerModel;
 import com.dev.christopher.smartjug.model.RegisterModel;
 import com.dev.christopher.smartjug.model.UpdateProfileIconModel;
 import com.dev.christopher.smartjug.model.User;
@@ -99,6 +100,24 @@ public class DataManager {
             @Override
             public void success(BottleResult bottleResult, Response response) {
                 EventBus.getDefault().post(bottleResult);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                EventBus.getDefault().post(error);
+            }
+        });
+    }
+
+    public void foudBottle(OwnerModel id){
+        Log.d(id.getOwner()," :UserID");
+        bottle.foudBottle(id, new Callback<BottleResult>() {
+            @Override
+            public void success(BottleResult bottleResult, Response response) {
+               /* if (bottleResult.getError()!=null)
+                    EventBus.getDefault().post(new ErrorResult(bottleResult.getError()));
+                else*/
+                    EventBus.getDefault().post(bottleResult);
             }
 
             @Override

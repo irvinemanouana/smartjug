@@ -10,11 +10,23 @@ public class BottleResult implements Serializable {
     private String _id;
     private String owner;
     private String date;
+    private String error;
+
 
     public BottleResult(String _id, String owner, String date) {
         this._id = _id;
         this.owner = owner;
         this.date = date;
+
+    }
+
+    public BottleResult(String _id, String owner) {
+        this._id = _id;
+        this.owner = owner;
+    }
+
+    public BottleResult(String error) {
+        this.error = error;
     }
 
     @Override
@@ -23,6 +35,7 @@ public class BottleResult implements Serializable {
                 "_id='" + _id + '\'' +
                 ", owner='" + owner + '\'' +
                 ", date='" + date + '\'' +
+                ", error='" + error + '\'' +
                 '}';
     }
 
@@ -30,23 +43,15 @@ public class BottleResult implements Serializable {
         return _id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
     public String getOwner() {
         return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getError() {
+        return error;
     }
 }

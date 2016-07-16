@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
-    private TextView name, lastname, email;
+    private TextView name, lastname, email,jugId;
     private Toolbar toolbar;
     private GoogleApiClient googleBuilder;
     private Location lastLocation;
@@ -111,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements
 
         Log.d(bottleResult.toString(), " :MAIN_BOTTLE");
 
+        jugId = (TextView) findViewById(R.id.jug);
+        jugId.setText(getString(R.string.jug)+bottleResult.get_id());
+
         navigationView = (NavigationView) findViewById(R.id.menu_navigation);
         View headerDrawer = navigationView.inflateHeaderView(R.layout.header_drawer);
         name = (TextView) headerDrawer.findViewById(R.id.name);
@@ -154,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements
         pieView.setPercentageBackgroundColor(getResources().getColor(R.color.colorPrimary));
         pieView.setInnerTextVisibility(View.VISIBLE);
         pieView.setInnerText("75 %");
-        pieView.setPercentageTextSize(75);
+        pieView.setPercentageTextSize(40);
 
 
     }

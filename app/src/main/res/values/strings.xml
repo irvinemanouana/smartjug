@@ -22,7 +22,7 @@
     <string name="info">Infos</string>
     <string name="step_two">Continuer</string>
     <string name="msg_next_stape">Vous allez maintenant lier votre "SmartJug" à votre compte,Munissez vous de votre ORCode </string>
-
+    <string name="jug">Smart-</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

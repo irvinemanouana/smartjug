@@ -5,6 +5,7 @@
     xmlns:plainpie="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@drawable/spashscreen_two"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_margin="@dimen/activity_horizontal_margin"

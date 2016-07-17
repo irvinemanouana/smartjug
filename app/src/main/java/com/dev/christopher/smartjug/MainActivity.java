@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dev.christopher.smartjug.dialog.CongratDialogFragment;
 import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.NetworkResult;
 import com.dev.christopher.smartjug.result.UserResult;
@@ -58,14 +59,14 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     protected void onStart() {
         googleBuilder.connect();
-        EventBus.getDefault().register(this);
+        //EventBus.getDefault().register(this);
         super.onStart();
     }
 
     @Override
     protected void onStop() {
         googleBuilder.disconnect();
-        EventBus.getDefault().unregister(this);
+       // EventBus.getDefault().unregister(this);
         super.onStop();
     }
 
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
+        //CongratDialogFragment.newInstance().show(getFragmentManager(),null);
 
         cardViewBottle = (CardView)  findViewById(R.id.bottle_card);
         cardViewBottle.setOnClickListener(new View.OnClickListener() {

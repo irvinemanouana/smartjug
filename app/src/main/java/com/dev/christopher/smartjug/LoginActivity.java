@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.dev.christopher.smartjug.dialog.CongratDialogFragment;
 import com.dev.christopher.smartjug.dialog.LoaderDialog;
 import com.dev.christopher.smartjug.generator.ServiceGenerator;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
@@ -54,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-
         super.onStart();
     }
 
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         if (intent.hasExtra(FROM_ACCOUNT)){
             Boolean link_success= intent.getBooleanExtra(FROM_ACCOUNT,true);
             if (link_success){
-
+                CongratDialogFragment.newInstance().show(getFragmentManager(),null);
             }
             else{
 
@@ -122,14 +122,6 @@ public class LoginActivity extends AppCompatActivity {
     }
     @Subscribe
     public void onEventMainThread(UserResult result){
-        /*SavePreferences.newInstance(getApplicationContext()).createUserSession(result);
-        Log.d("onEventresult",result.toString());
-        dataManager.setUserResult(result);
-        EventBus.getDefault().unregister(result);
-        loaderDialog.dismiss();
-        Intent intent= new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(intent);
-        finish();*/
         this.userResult = result;
         Log.d(result.toString(), ":UserMain");
         DataManager.getInstance().foudBottle(new OwnerModel(result.get_id()));

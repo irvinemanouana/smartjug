@@ -3,7 +3,7 @@
     <string name="txt_mail">Email</string>
     <string name="txt_pass">Mot de passe</string>
     <string name="connexion">Connexion</string>
-    <string name="register">S enregister</string>
+    <string name="register">S\'enregister</string>
     <string name="string_woman">Femme</string>
     <string name="string_men">Homme</string>
     <string name="string_name">Nom</string>
@@ -25,6 +25,7 @@
     <string name="jug">Smart-</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="congratulation">Félicitations, votre compte a été créé avec succès</string>
 
 
     <!--Drawer-->

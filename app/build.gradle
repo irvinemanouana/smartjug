@@ -53,6 +53,11 @@ dependencies {
     compile 'me.dm7.barcodescanner:zxing:1.8.4'
     compile 'com.android.support:multidex:1.0.1'
 
+    compile ('io.socket:socket.io-client:0.7.0') {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
+
 }
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'

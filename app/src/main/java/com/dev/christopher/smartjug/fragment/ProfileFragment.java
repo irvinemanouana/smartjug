@@ -17,11 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dev.christopher.smartjug.R;
-import com.dev.christopher.smartjug.generator.ServiceGenerator;
-import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
 import com.dev.christopher.smartjug.manager.DataManager;
 import com.dev.christopher.smartjug.model.UpdateProfileIconModel;
-import com.dev.christopher.smartjug.model.User;
 import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.ErrorResult;
 import com.dev.christopher.smartjug.result.UserResult;
@@ -30,12 +27,10 @@ import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONObject;
+
 
 import az.plainpie.PieView;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+
 
 /**
  * Created by Christopher on 14/06/16.

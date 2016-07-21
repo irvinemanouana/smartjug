@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     app:cardCornerRadius="6dp"
+    app:cardUseCompatPadding="true"
     android:layout_height="wrap_content">
    <LinearLayout
        android:orientation="vertical"
@@ -13,16 +14,16 @@
        <TextView
            android:drawableLeft="@drawable/ic_action_water_glass"
            android:id="@+id/water_drink"
+           android:text="test"
+           android:textColor="@color/colorPrimary"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content" />
-       <TextView
-           android:drawableLeft="@drawable/ic_action_thermo"
-           android:id="@+id/area_temp"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
+
        <TextView
            android:drawableLeft="@drawable/ic_action_calendar"
            android:id="@+id/date_hours"
+           android:textColor="@color/colorPrimary"
+           android:text="test"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content" />
    </LinearLayout>

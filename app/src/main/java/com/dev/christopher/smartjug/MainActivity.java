@@ -21,11 +21,16 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dev.christopher.smartjug.adapter.DataAdapter;
 import com.dev.christopher.smartjug.dialog.CongratDialogFragment;
+import com.dev.christopher.smartjug.gcm.RegistrationIntentService;
+import com.dev.christopher.smartjug.manager.DataManager;
 import com.dev.christopher.smartjug.result.BottleResult;
+import com.dev.christopher.smartjug.result.DataResult;
 import com.dev.christopher.smartjug.result.NetworkResult;
 import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
@@ -40,8 +45,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 
+import java.util.ArrayList;
+import java.util.Date;
 
 import az.plainpie.PieView;
+import io.socket.engineio.client.Socket;
 
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -49,31 +57,36 @@ public class MainActivity extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
     private NavigationView navigationView;
-    private TextView name, lastname, email,jugId;
+    private TextView name, lastname, email;
     private Toolbar toolbar;
     private GoogleApiClient googleBuilder;
     private Location lastLocation;
-    private CardView cardViewBottle;
     private BottleResult bottleResult;
+    private static final int WOMAN_TARGET_LITER = 2200;
+    private static final int MAN_TARGET_LITER = 3000;
+    private Date dateOfDay;
+    private ListView listView;
+    private PieView pieView;
+    private DataAdapter dataAdapter;
 
     @Override
     protected void onStart() {
         googleBuilder.connect();
-        //EventBus.getDefault().register(this);
+        dateOfDay = new Date();
+        EventBus.getDefault().register(this);
         super.onStart();
     }
 
     @Override
     protected void onStop() {
+        EventBus.getDefault().unregister(this);
         googleBuilder.disconnect();
-       // EventBus.getDefault().unregister(this);
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        /*socket.disconnect();*/
     }
 
     @Override
@@ -87,19 +100,10 @@ public class MainActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
-        //CongratDialogFragment.newInstance().show(getFragmentManager(),null);
-
-        cardViewBottle = (CardView)  findViewById(R.id.bottle_card);
-        cardViewBottle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),ScannerActivity.class);
-                startActivity(intent);
-            }
-        });
+        Intent gcmIntent = new Intent(getApplicationContext(), RegistrationIntentService.class);
+        startService(gcmIntent);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -111,10 +115,10 @@ public class MainActivity extends AppCompatActivity implements
         user = SavePreferences.newInstance(this).getUserInfo();
         bottleResult = SavePreferences.newInstance(this).getBottle();
 
-        Log.d(bottleResult.toString(), " :MAIN_BOTTLE");
+        Log.d("Bottle _ID"+bottleResult.toString(), " :MAIN_BOTTLE");
+        DataManager.getInstance().getDayData(bottleResult.get_id());
 
-        jugId = (TextView) findViewById(R.id.jug);
-        jugId.setText(getString(R.string.jug)+bottleResult.get_id());
+        listView =(ListView) findViewById(R.id.list_water_item);
 
         navigationView = (NavigationView) findViewById(R.id.menu_navigation);
         View headerDrawer = navigationView.inflateHeaderView(R.layout.header_drawer);
@@ -150,15 +154,25 @@ public class MainActivity extends AppCompatActivity implements
                         Intent accountIntent = new Intent(getApplicationContext(), AccountActivity.class);
                         startActivity(accountIntent);
                         break;
+                    case R.id.settings:
+                        Intent settingsIntent = new Intent(getApplicationContext(),SettingsActivity.class);
+                        startActivity(settingsIntent);
+
                 }
                 return false;
             }
         });
 
-        PieView pieView = (PieView) findViewById(R.id.pieView);
+        pieView = (PieView) findViewById(R.id.pieView);
         pieView.setPercentageBackgroundColor(getResources().getColor(R.color.colorPrimary));
         pieView.setInnerTextVisibility(View.VISIBLE);
-        pieView.setInnerText("75 %");
+        pieView.setInnerText("0%");
+        pieView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"test",Toast.LENGTH_SHORT).show();
+            }
+        });
         pieView.setPercentageTextSize(40);
 
 
@@ -199,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements
         }
         lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleBuilder);
         if (lastLocation !=null){
-            Log.d("longitude", String.valueOf(lastLocation.getLatitude()));
+            Log.d("longitude:", String.valueOf(lastLocation.getLongitude()));
+            Log.d("latitude:", String.valueOf(lastLocation.getLatitude()));
         }else {
             Log.d("longitude", "null");
         }
@@ -218,6 +233,32 @@ public class MainActivity extends AppCompatActivity implements
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(NetworkResult result){
         Log.d("onEvent",result.getContent());
+
         Toast.makeText(getApplicationContext(),result.getContent(),Toast.LENGTH_SHORT).show();
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(ArrayList<DataResult> dataResults){
+        double liter;
+        ArrayList<Double> doubles = new ArrayList<>();
+        if (dataResults!=null || dataResults.size()>0){
+            for (DataResult result:dataResults) {
+                liter = result.getLiter();
+                Log.d(String.valueOf(liter),"value");
+                doubles.add(liter);
+            }
+            double sum =0;
+            for (Double aDouble:doubles) {
+                sum +=aDouble;
+            }
+            pieView.setmPercentage((float) sum*10);
+            dataAdapter = new DataAdapter(getApplicationContext(),dataResults);
+            listView.setAdapter(dataAdapter);
+            Log.d("test sum",String.valueOf(sum));
+
+        }
+        Log.d("onEventThreadMode.MAIN", String.valueOf(dataResults.size()));
+
+    }
+
 }

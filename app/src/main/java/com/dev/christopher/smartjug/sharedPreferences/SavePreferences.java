@@ -46,6 +46,9 @@ public class SavePreferences {
     }
 
     public  void createUserSession(UserResult result,BottleResult bottleResult){
+        Log.d("createUserSession",result.get_id());
+        Log.d("createUserSession",bottleResult.get_id());
+
         editor.putBoolean(value_exist,true);
         editor.putString(value_id,result.get_id());
         editor.putString(value_gender,result.getSex());
@@ -74,7 +77,7 @@ public class SavePreferences {
     }
 
     public BottleResult getBottle(){
-        return  new BottleResult(preferences.getString(value_id,null),preferences.getString(value_bottle,null));
+        return  new BottleResult(preferences.getString(value_bottle,null),preferences.getString(value_id,null));
     }
 
 

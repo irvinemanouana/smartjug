@@ -16,10 +16,5 @@
             android:id="@+id/log_out"/>
 
     </group>
-    <group android:checkableBehavior="single">
-        <item
-            android:icon="@drawable/ic_action_about"
-            android:title="A propos"
-           android:id="@+id/about" />
-    </group>
+
 </menu>

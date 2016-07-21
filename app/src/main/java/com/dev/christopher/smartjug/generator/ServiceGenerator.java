@@ -13,7 +13,7 @@ import retrofit.client.OkClient;
 public class ServiceGenerator {
 
     private static RestAdapter.Builder builder = new RestAdapter.Builder()
-            .setEndpoint(Tag.SMART_API_URL_PROD)
+            .setEndpoint(Tag.SMART_API_URL_PROD_HEROKU)
             .setClient(new OkClient(new OkHttpClient()));
     public static <S> S createService(Class<S> serviceClass){
         RestAdapter restAdapter = builder.build();

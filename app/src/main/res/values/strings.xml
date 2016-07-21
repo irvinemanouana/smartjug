@@ -26,8 +26,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="congratulation">Félicitations, votre compte a été créé avec succès</string>
-
-
+    <string name="settings_title">Paramètre</string>
+    <string name="about">A propos</string>
     <!--Drawer-->
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
@@ -39,6 +39,7 @@
     <string name="logout">Déconnexion</string>
     <string name="logout_message">Voulez-vous vraiment vous deconnecter?</string>
     <string name="loader_string">chargement...</string>
+    <string name="delete_account">Supprimer votre Compte</string>
 
     <string-array name="item_menu">
         <item>Mon compte</item>
@@ -46,6 +47,9 @@
         <item>Déconnexion</item>
     </string-array>
     <string-array name="settings_menu">
-        <item>Contacter </item>
+        <item>Nous Contacter</item>
+        <item>Dissocier de votre SmartJug</item>
+        <item>Supprimer vos données SmartJug</item>
+        <item>A propos de SmartJug</item>
     </string-array>
 </resources>

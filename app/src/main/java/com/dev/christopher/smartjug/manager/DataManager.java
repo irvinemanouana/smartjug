@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.dev.christopher.smartjug.generator.ServiceGenerator;
 import com.dev.christopher.smartjug.interfaceClient.BottleInterfaceClient;
+import com.dev.christopher.smartjug.interfaceClient.DataInterfaceClient;
 import com.dev.christopher.smartjug.interfaceClient.UserInterfaceClient;
+import com.dev.christopher.smartjug.model.BottleDataRequest;
 import com.dev.christopher.smartjug.model.BottleToUserModel;
 import com.dev.christopher.smartjug.model.LoginModel;
 import com.dev.christopher.smartjug.model.OwnerModel;
@@ -12,11 +14,14 @@ import com.dev.christopher.smartjug.model.RegisterModel;
 import com.dev.christopher.smartjug.model.UpdateProfileIconModel;
 import com.dev.christopher.smartjug.model.User;
 import com.dev.christopher.smartjug.result.BottleResult;
+import com.dev.christopher.smartjug.result.DataResult;
 import com.dev.christopher.smartjug.result.ErrorResult;
 import com.dev.christopher.smartjug.result.UserResult;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -30,10 +35,12 @@ public class DataManager {
     private static UserResult userResult;
     private static UserInterfaceClient client;
     private static BottleInterfaceClient bottle;
+    private static DataInterfaceClient data;
 
     public DataManager() {
         this.client = ServiceGenerator.createService(UserInterfaceClient.class);
         this.bottle= ServiceGenerator.createService(BottleInterfaceClient.class);
+        this.data = ServiceGenerator.createService(DataInterfaceClient.class);
     }
 
 
@@ -123,6 +130,22 @@ public class DataManager {
             @Override
             public void failure(RetrofitError error) {
                 EventBus.getDefault().post(error);
+            }
+        });
+    }
+
+    public void getDayData(String idBottle){
+        Log.d("getDayData",idBottle);
+        data.getWaterData(new BottleDataRequest(idBottle), new Callback<ArrayList<DataResult>>() {
+            @Override
+            public void success(ArrayList<DataResult> dataResults, Response response) {
+                Log.d("ArraySuccess", String.valueOf(dataResults.size()));
+                EventBus.getDefault().post(dataResults);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("RetrofitError",error.getMessage());
             }
         });
     }

@@ -2,6 +2,7 @@ package com.dev.christopher.smartjug.gcm;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.util.Log;
 
 import com.dev.christopher.smartjug.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -26,8 +27,12 @@ public class RegistrationIntentService extends IntentService {
         try {
             tocken = instanceID.getToken(getString(R.string.gcm_defaultSenderId), GoogleCloudMessaging.INSTANCE_ID_SCOPE,null);
         } catch (IOException e) {
+            Log.d(TAG, "Failed to complete token refresh", e);
             e.printStackTrace();
         }
+        if (tocken!=null)
+            Log.d("Registration Token",tocken);
+
     }
 
 

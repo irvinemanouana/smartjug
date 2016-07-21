@@ -3,6 +3,9 @@ package com.dev.christopher.smartjug.interfaceClient;
 import com.dev.christopher.smartjug.model.BottleToUserModel;
 import com.dev.christopher.smartjug.model.OwnerModel;
 import com.dev.christopher.smartjug.result.BottleResult;
+import com.dev.christopher.smartjug.result.DataResult;
+
+import java.util.ArrayList;
 
 import retrofit.Callback;
 import retrofit.http.Body;
@@ -17,4 +20,5 @@ public interface BottleInterfaceClient {
 
     @POST("/bottle/get")
     void foudBottle(@Body OwnerModel owner , Callback<BottleResult> resultCallback);
+
 }

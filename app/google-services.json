@@ -1,12 +1,12 @@
 {
   "project_info": {
-    "project_number": "866408839187",
-    "project_id": "smartjug-ea328"
+    "project_number": "817702250662",
+    "project_id": "smartjug-dea98"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:866408839187:android:c4fcd7b5546eb413",
+        "mobilesdk_app_id": "1:817702250662:android:c4fcd7b5546eb413",
         "android_client_info": {
           "package_name": "com.dev.christopher.smartjug"
         }
@@ -14,7 +14,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB85sUSzPk1VBAwoOuGZy-ETTZKXSp46uM"
+          "current_key": "AIzaSyDaOJh0aqPALeTV6mjRJekgBf637Y9SgRQ"
         }
       ],
       "services": {

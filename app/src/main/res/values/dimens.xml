@@ -6,4 +6,5 @@
     <dimen name="drawer_text_dimens">15dp</dimen>
     <dimen name="header_drawer">190dp</dimen>
     <dimen name="margin_jug">10dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
 </resources>

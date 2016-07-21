@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.dev.christopher.smartjug.adapter.SettingsAdapter;
 import com.dev.christopher.smartjug.result.BottleResult;
 import com.dev.christopher.smartjug.result.UserResult;
 import com.dev.christopher.smartjug.sharedPreferences.SavePreferences;
@@ -19,11 +20,12 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         getSupportActionBar().setTitle(getString(R.string.settings_title));
         menuListView = (ListView) findViewById(R.id.settings_list);
+        SettingsAdapter settingsAdapter = new SettingsAdapter(getApplicationContext(),getResources().getStringArray(R.array.settings_menu));
         SavePreferences preferences = SavePreferences.newInstance(getApplicationContext());
         BottleResult bottleResult = preferences.getBottle();
         UserResult userResult = preferences.getUserInfo();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.settings_menu));
-        menuListView.setAdapter(adapter);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.settings_menu));
+        menuListView.setAdapter(settingsAdapter);
         emailTextView =(TextView) findViewById(R.id.email_user);
         botlle_idTextView =(TextView) findViewById(R.id.bottle_user);
         emailTextView.setText(userResult.getEmail());

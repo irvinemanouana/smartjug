@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.Loader;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import com.dev.christopher.smartjug.adapter.DataAdapter;
 import com.dev.christopher.smartjug.dialog.CongratDialogFragment;
+import com.dev.christopher.smartjug.dialog.LoaderDialog;
 import com.dev.christopher.smartjug.gcm.RegistrationIntentService;
 import com.dev.christopher.smartjug.manager.DataManager;
 import com.dev.christopher.smartjug.result.BottleResult;
@@ -62,9 +64,11 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient googleBuilder;
     private Location lastLocation;
     private BottleResult bottleResult;
-    private static final int WOMAN_TARGET_LITER = 2200;
-    private static final int MAN_TARGET_LITER = 3000;
+    private static final int WOMAN_TARGET_LITER = 220;
+    private static final int MAN_TARGET_LITER = 300;
+    private static final int DEFAULT_TARGET_LITER = 150;
     private Date dateOfDay;
+    private LoaderDialog loaderDialog;
     private ListView listView;
     private PieView pieView;
     private DataAdapter dataAdapter;
@@ -116,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements
         bottleResult = SavePreferences.newInstance(this).getBottle();
 
         Log.d("Bottle _ID"+bottleResult.toString(), " :MAIN_BOTTLE");
+        loaderDialog = LoaderDialog.newInstance();
+        loaderDialog.show(getFragmentManager(),null);
         DataManager.getInstance().getDayData(bottleResult.get_id());
 
         listView =(ListView) findViewById(R.id.list_water_item);
@@ -257,6 +263,7 @@ public class MainActivity extends AppCompatActivity implements
             Log.d("test sum",String.valueOf(sum));
 
         }
+        loaderDialog.dismiss();
         Log.d("onEventThreadMode.MAIN", String.valueOf(dataResults.size()));
 
     }
